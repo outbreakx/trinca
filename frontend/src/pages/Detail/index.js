@@ -29,14 +29,18 @@ import {
 	NewUserContainer,
 	ModalContainer,
 	InputContainer,
-	Label
+	Label,
+	ActionContainer
 } from './styles';
 import participantService from '../../services/participantService';
 
-const DetailItem = (participant, index, onCheck) => {
+const DetailItem = (participant, index, onCheck, onAction) => {
 	return <ItemContainer key={index}>
 		<ItemFirstHeader>
 			<ItemCheck checked={participant.confirmed} onClick={() => onCheck(index)} />
+			<ActionContainer onClick={() => onAction(participant._id)}>
+				<Icon className="fas fa-trash" style={{ color: 'red' }}></Icon>
+			</ActionContainer>
 			<ItemName>{participant.name}</ItemName>
 		</ItemFirstHeader>
 		<ItemAmount checked={participant.confirmed}>R$ {participant.amount}</ItemAmount>
@@ -109,7 +113,13 @@ const Detail = (props) => {
 	const onModalExit = () => {
 		setModalOpen(false);
 	}
-
+	const onAction = (id) => {
+		participantService.delete(id).then(res => {
+			let tParticipants = [...participants];
+			tParticipants = tParticipants.filter(x => x._id !== id);
+			setParticipants(tParticipants);
+		});
+	}
 	return <Container>
 		<Modal open={isModalOpen} onExit={onModalExit} title={"New User"} content={ModalContent()} />
 		<NewUserContainer>
@@ -136,7 +146,7 @@ const Detail = (props) => {
 			</DetailHeader>
 
 			<DetailContainer>
-				{participants.map((item, index) => DetailItem(item, index, onCheck))}
+				{participants.map((item, index) => DetailItem(item, index, onCheck, onAction))}
 			</DetailContainer>
 		</DetailContainer>
 	</Container>

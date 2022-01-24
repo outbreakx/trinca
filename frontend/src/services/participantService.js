@@ -9,7 +9,10 @@ const participantService = {
 	},
 	update: async (id, confirmed) => {
 		return await api.put(`/participants/${id}`, { confirmed }).then((res) => res.data);
-	}
+	},
+	delete: async (id) => {
+		return await api.delete(`/participants/${id}`).then((res) => res.data);
+	},
 };
 
 

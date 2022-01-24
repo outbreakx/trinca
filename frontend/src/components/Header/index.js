@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
 	Container,
@@ -6,8 +7,12 @@ import {
 } from './styles';
 
 const Header = () => {
+	const navigate = useNavigate();
+	const goHome = () => {
+		navigate('/');
+	}
 	return <Container>
-		<Title>Barbecue Schedule</Title>
+		<Title onClick={goHome}>Barbecue Schedule</Title>
 	</Container>
 }
 

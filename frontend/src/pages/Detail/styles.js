@@ -160,3 +160,8 @@ export const InputContainer = styled.div`
 export const Label = styled.label`
 
 `;
+
+export const ActionContainer = styled.div`
+	display: flex;
+	cursor: pointer;
+`;
