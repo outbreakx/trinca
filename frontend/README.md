@@ -5,7 +5,7 @@
 You must have node installed.
 
 ### Instalation
-1. git clone https://github.com/Bufige/trinca
+1. git clone https://github.com/outbreakx/trinca
 2. Install NPM packages
 ```
 npm install
